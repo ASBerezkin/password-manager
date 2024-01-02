@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Grid, Button, Typography, Container, TextField } from '@mui/material';
 import classes from './page.module.css';
 import Link from 'next/link';

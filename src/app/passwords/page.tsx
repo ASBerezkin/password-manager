@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box, Button, ButtonGroup, Container, Grid, TextField, Typography } from '@mui/material';
 import Link from 'next/link';
 import PasswordItem from '@/components/PasswordItem';
@@ -20,7 +19,7 @@ export default function Passwords() {
           fullWidth
           label="Поиск"
           type="search"
-          size="small"
+          size="medium"
           color="primary"
           placeholder="Найти пароль"
         />

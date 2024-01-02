@@ -1,9 +1,10 @@
 'use client';
+import { useState, MouseEvent } from 'react';
 import { Button, Divider, Grid, IconButton, Popover, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ShareIcon from '@mui/icons-material/Share';
 import classes from './styles.module.scss';
-import { useState, MouseEvent } from 'react';
 
 const PasswordItem = () => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -32,6 +33,9 @@ const PasswordItem = () => {
           <Typography variant="subtitle2">Login</Typography>
         </Grid>
         <Grid item>
+          <IconButton color="primary" size="small">
+            <ShareIcon />
+          </IconButton>
           <IconButton color="primary" size="small">
             <ContentCopyIcon />
           </IconButton>
