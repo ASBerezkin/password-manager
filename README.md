@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ASB UI KIT
 
-## Getting Started
+ASB UI KIT — это библиотека UI-компонентов на базе React, разработанная с использованием TypeScript, Storybook, ESLint, Prettier и Vite. Цель данного проекта — упростить и стандартизировать создание UI в ваших React-приложениях, предоставляя набор готовых, переиспользуемых и типизированных компонентов.
 
-First, run the development server:
+## Возможности
+
+- **React + TypeScript**: Полноценная типизация, повышенная надёжность.
+- **Storybook**: Просмотр, тестирование и документирование компонентов в изолированной среде.
+- **ESLint и Prettier**: Единый код-стайл и контроль качества кода.
+- **Vite**: Быстрая сборка и удобный локальный дев-сервер.
+- **Rollup/Vite build**: Сборка оптимизированной версии библиотеки для публикации в npm.
+
+## Установка
+
+Пока библиотека не опубликована, вы можете клонировать репозиторий и установить зависимости:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/my-ui-kit.git
+cd my-ui-kit
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`yarn dev` — Запускает локальный дев-сервер Vite для разработки.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+`yarn build` — Собирает библиотеку в папку dist в формате ES и CJS.
 
-## Learn More
+`yarn preview` — Позволяет просмотреть собранный билд локально.
 
-To learn more about Next.js, take a look at the following resources:
+`yarn storybook` — Запускает Storybook для просмотра и тестирования компонентов.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`yarn build-storybook` — Создаёт статическую сборку Storybook.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`yarn lint` — Запускает ESLint для проверки кода.
 
-## Deploy on Vercel
+`yarn format` — Прогоняет Prettier для форматирования кода.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Разработка новых компонентов
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Создайте новую директорию для компонента в src/components. Например, для компонента Card:
+
+```bash
+mkdir src/components/Card
+```
+
+2. Создайте файл компонента Card.tsx:
+
+```tsx
+import React from 'react';
+
+export type CardProps = {
+  title: string;
+  children?: React.ReactNode;
+};
+
+export const Card: React.FC<CardProps> = ({ title, children }) => {
+  return (
+    <div style={{ border: '1px solid #eee', padding: '16px' }}>
+      <h2>{title}</h2>
+      <div>{children}</div>
+    </div>
+  );
+};
+```
+
+3. Создайте Story для компонента Card.stories.tsx:
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react';
+import { Card, CardProps } from './Card';
+
+const meta: Meta<CardProps> = {
+  title: 'Components/Card',
+  component: Card,
+};
+export default meta;
+
+type Story = StoryObj<CardProps>;
+
+export const Default: Story = {
+  args: {
+    title: 'Example Card',
+    children: 'Card content goes here',
+  },
+};
+```
+
+4. Просмотрите компонент в Storybook:
+
+```bash
+yarn storybook
+```
+
+5. Настройте линтер и форматирование: Перед коммитом убедитесь, что код соответствует стилю:
+
+```bash
+yarn lint
+yarn format
+```
+
+
+### Публикация
+
+Когда вы будете готовы опубликовать библиотеку в npm:
+
+1. Обновите версию в package.json.
+
+2. Выполните:
+
+```bash
+yarn build
+yarn publish --access public
+```
+
+Убедитесь, что вы авторизованы под нужным аккаунтом npm.
+
+### Структура проекта
+```textmate
+my-ui-kit/
+├─ .storybook/
+│  ├─ main.ts
+│  ├─ preview.ts
+├─ src/
+│  ├─ components/
+│  │  ├─ Button/
+│  │  │  ├─ Button.tsx
+│  │  │  ├─ Button.stories.tsx
+│  │  │  ├─ Button.test.tsx (опционально, если используете тесты)
+│  │  │  └─ index.ts
+│  │  └─ index.ts (реэкспорт всех компонентов)
+│  ├─ index.ts (экспорт всей библиотеки)
+├─ package.json
+├─ tsconfig.json
+├─ vite.config.ts
+├─ .eslintrc.js
+├─ .prettierrc
+```
